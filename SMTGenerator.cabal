@@ -1,0 +1,63 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: cf5cc6775706f7ed2587e8112826651b5f349e6540532c7763ca4aa8e951f9e9
+
+name:           SMTGenerator
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/teimichael/SMTGenerator#readme>
+homepage:       https://github.com/teimichael/SMTGenerator
+bug-reports:    https://github.com/teimichael/SMTGenerator/issues
+author:         Michael Tei
+maintainer:     example@example.com
+copyright:      2020 Michael Tei
+license:        MIT
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/SMTGenerator
+
+library
+  exposed-modules:
+      Core.SMT
+      Example.KillerSudoku
+  other-modules:
+      Paths_SMTGenerator
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable SMTGenerator-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_SMTGenerator
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      SMTGenerator
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite SMTGenerator-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_SMTGenerator
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      SMTGenerator
+    , base >=4.7 && <5
+  default-language: Haskell2010
