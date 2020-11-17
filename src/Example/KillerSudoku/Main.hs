@@ -28,6 +28,23 @@ process [filename] = do
     putStrLn check
 
 
+-- Declare variables
+declareVars :: String
+declareVars = unlines $ map (show . Declare) $ concat vars
+
+-- Generate constraints
+generate :: String -> [Formula]
+generate cageInput = digitConstraints ++ rowConstraints ++ colConstrains ++ gridConstraints ++ cageConstraints cageInput
+
+-- Assert constraints
+assertConstraints :: String -> String
+assertConstraints cageInput = show (Assert (And (generate cageInput)))
+
+-- Check commands
+check :: String
+check = unlines $ map show [Check, GetVal $ concat vars]
+
+
 -- Define length of the side
 sideLength :: Int
 sideLength = 9
@@ -62,19 +79,3 @@ gridConstraints = [Distinct grid | grid <- grids]
 cageConstraints :: String -> [Formula]
 cageConstraints cageInput = [Eq (Val (read v)) (Plus (map (\x -> Var ("x" ++ x)) xs)) | (v:xs) <- cages]
     where cages = map words (lines cageInput)
-
--- Declare variables
-declareVars :: String
-declareVars = unlines $ map (show . Declare) $ concat vars
-
--- Generate constraints
-generate :: String -> [Formula]
-generate cageInput = digitConstraints ++ rowConstraints ++ colConstrains ++ gridConstraints ++ cageConstraints cageInput
-
--- Assert constraints
-assertConstraints :: String -> String
-assertConstraints cageInput = show (Assert (And (generate cageInput)))
-
--- Check commands
-check :: String
-check = unlines $ map show [Check, GetVal $ concat vars]

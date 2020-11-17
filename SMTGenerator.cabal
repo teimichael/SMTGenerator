@@ -28,7 +28,7 @@ source-repository head
 library
   exposed-modules:
       Core.SMT
-      Example.Basis.Main
+      Example.Triangle.Main
       Example.KillerSudoku.Main
   other-modules:
       Paths_SMTGenerator
