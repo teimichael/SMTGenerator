@@ -1,4 +1,4 @@
-module Example.KillerSudoku
+module Example.KillerSudoku.Main
     ( outFunc
     ) where
 

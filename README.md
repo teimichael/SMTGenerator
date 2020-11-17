@@ -3,12 +3,12 @@ Writing SMT-LIB Standard programs with Haskell.
 
 ## Examples
 ### Killer SudoKu Puzzle
-in: cage constraints
+**In**: cage constraints
 
-out: SMT-LIB program
+**Out**: SMT-LIB program
 
-E.g.
 ```
-./KillerSudoku cage_constraints > output
+<*> cage_constraints > output
 z3 output
 ```
+> <*>: compiled program | "stack run"
