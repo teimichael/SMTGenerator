@@ -5,4 +5,4 @@ module Main where
 import Example.Termination.Main
 
 main :: IO ()
-main = mainFunc
+main = testFunc

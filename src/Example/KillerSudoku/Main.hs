@@ -1,5 +1,5 @@
 module Example.KillerSudoku.Main
-    ( outFunc
+    ( testFunc
     ) where
 
 import System.Environment ( getArgs )
@@ -8,8 +8,12 @@ import Data.List ( transpose )
 import Core.SMT ( Expr(..), Formula (..), Command (..) )
 
 
-outFunc :: IO ()
-outFunc = do
+testFunc :: IO ()
+testFunc = do
+    process ["./src/Example/KillerSudoku/cage_constraints"]
+
+consoleFunc :: IO ()
+consoleFunc = do
     -- Read cage file
     args <- getArgs
     -- Start processing to generate SMTLib file

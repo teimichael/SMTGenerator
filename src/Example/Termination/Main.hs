@@ -1,5 +1,5 @@
 module Example.Termination.Main
-    ( mainFunc,
+    ( testFunc,
       linearInterpretation
     ) where
 
@@ -21,8 +21,8 @@ r2 = (F "a" [F "c" [V "x", V "xs"], V "ys"], F "c" [V "x", F "a" [V "xs", V "ys"
 trs :: TRS
 trs = [r1, r2]
 
-mainFunc :: IO ()
-mainFunc = do
+testFunc :: IO ()
+testFunc = do
     putStrLn $ unlines $ map show (linearInterpretation trs)
 
 
