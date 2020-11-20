@@ -23,13 +23,15 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/SMTGenerator
+  location: https://github.com/teimichael/SMTGenerator
 
 library
   exposed-modules:
       Core.SMT
       Example.Triangle.Main
       Example.KillerSudoku.Main
+      Example.Termination.Main
+      Example.Termination.TRS
   other-modules:
       Paths_SMTGenerator
   hs-source-dirs:

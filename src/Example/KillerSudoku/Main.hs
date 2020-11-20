@@ -2,8 +2,8 @@ module Example.KillerSudoku.Main
     ( outFunc
     ) where
 
-import System.Environment
-import Data.List
+import System.Environment ( getArgs )
+import Data.List ( transpose )
 
 import Core.SMT ( Expr(..), Formula (..), Command (..) )
 

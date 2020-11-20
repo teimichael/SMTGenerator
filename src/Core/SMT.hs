@@ -11,6 +11,7 @@ data Expr =
     | Plus [Expr]
     | Sub [Expr]
     | Mul [Expr]
+    deriving Eq
 
 -- Define formula structure
 data Formula =
@@ -22,6 +23,7 @@ data Formula =
     | Geq Expr Expr
     | Leq Expr Expr
     | Distinct [Expr]
+    deriving Eq
 
 -- Define command structure
 data Command = 
