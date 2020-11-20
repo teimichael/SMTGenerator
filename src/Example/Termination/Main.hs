@@ -78,6 +78,39 @@ conFormula (t1, t2) = Gt (constant t1) (constant t2)
 
 
 {-
+    Variables
+-}
+
+-- Const variables. E.g. a_0 of (a_0 + a_1 * x_1)
+conVars :: Term -> [Expr]
+conVars (V _) = []
+conVars (F s as) = Var (s ++ "_0") : concat [conVars a | a <- as]
+
+
+-- Coefficient variables. E.g. a_1 of (a_0 + a_1 * x_1)
+coeVars :: Term -> [Expr]
+coeVars (V _) = []
+coeVars (F s as) = [Var (s ++ "_" ++ show i) | i <- [1..length as]] ++ concat [coeVars a | a <- as]
+
+
+-- Constant and Coefficient variables. E.g. a_0, a_1 of (a_0 + a_1 * x_1)
+conCoeVars :: Term -> [Expr]
+conCoeVars (V _) = []
+conCoeVars (F s as) = [Var (s ++ "_" ++ show i) | i <- [0..length as]] ++ concat [conCoeVars a | a <- as]
+
+
+-- All Constant and Coefficient variables in a TRS
+allConCoeVars :: TRS -> [Expr]
+allConCoeVars trs = nub $ concat [ conCoeVars t1 ++ conCoeVars t2 | (t1, t2) <- trs]
+
+
+-- Term variables. E.g. x_1 of (a_0 + a_1 * x_1)
+terVars :: Term -> [String]
+terVars (V v) = [v]
+terVars (F _ as) = concat [ terVars a | a <- as]
+
+
+{-
     Calculate coefficients and constants
 -}
 -- Coefficient of a term variable
@@ -116,36 +149,4 @@ simplify (Plus es) = simPlus $ filter (\e -> e /= Val 0) [simplify e | e <- es]
           simPlus es | Val 0 `elem` es = simplify (Plus es)
                      | otherwise = Plus es
 
-
-{-
-    Variables
--}
-
--- Const variables. E.g. a_0 of (a_0 + a_1 * x_1)
-conVars :: Term -> [Expr]
-conVars (V _) = []
-conVars (F s as) = Var (s ++ "_0") : concat [conVars a | a <- as]
-
-
--- Coefficient variables. E.g. a_1 of (a_0 + a_1 * x_1)
-coeVars :: Term -> [Expr]
-coeVars (V _) = []
-coeVars (F s as) = [Var (s ++ "_" ++ show i) | i <- [1..length as]] ++ concat [coeVars a | a <- as]
-
-
--- Constant and Coefficient variables. E.g. a_0, a_1 of (a_0 + a_1 * x_1)
-conCoeVars :: Term -> [Expr]
-conCoeVars (V _) = []
-conCoeVars (F s as) = [Var (s ++ "_" ++ show i) | i <- [0..length as]] ++ concat [conCoeVars a | a <- as]
-
-
--- All Constant and Coefficient variables in a TRS
-allConCoeVars :: TRS -> [Expr]
-allConCoeVars trs = nub $ concat [ conCoeVars t1 ++ conCoeVars t2 | (t1, t2) <- trs]
-
-
--- Term variables. E.g. x_1 of (a_0 + a_1 * x_1)
-terVars :: Term -> [String]
-terVars (V v) = [v]
-terVars (F _ as) = concat [ terVars a | a <- as]
 
